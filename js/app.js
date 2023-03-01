@@ -2,6 +2,15 @@
 const themeSwitcherBtn = document.getElementById('themeSwitcherBtn');
 const themeIconImg = document.getElementById('themeIconImg');
 const themeTitleDiv = document.getElementById('themeTitleDiv');
+const searchInputTxt = document.getElementById('searchInputTxt');
+const cardsSection = document.getElementById('cardSection');
+const regionSelect = document.getElementById('regionSelect');
+
+
+
+// data
+let countries;
+let regions;
 
 /* style themes ----------------------------BEGIN */
 let themes = [
@@ -63,13 +72,99 @@ function setCurrentThemeSwitcherLabel(theme) {
 }
 /* style themes ----------------------------END */
 
+/* data fetching ---------------------------BEGIN */
+
+function fetchData() {
+	fetch(`https://restcountries.com/v3.1/all`)
+		.then(response => response.json())
+		.then(responseData => {
+			console.log('fetching data from REST API');
+			storeData(responseData);
+			showList();
+		});
+}
+
+function storeData(fetchedCountries) {
+	countries = fetchedCountries
+	initRegions();
+}
+
+function showList() {
+	console.log(regionSelect.value);
+	// filter countries by region filter
+	let filteredCountries = countries;
+	console.log('quantity of fetched countries', countries.length);
+	if (regionSelect.value) {
+		filteredCountries = countries.filter( element => element.region === regionSelect.value ); 
+	}
+	console.log(10);
+	console.log(filteredCountries.length);
+	
+	// filter countries by search string
+	let searchString =  searchInputTxt.value.toLowerCase();
+	console.log('search by', searchString);
+	filteredCountries = filteredCountries.filter( element => element.name.common.toLowerCase().includes(searchString) );
+	console.log('search result', filteredCountries);
+
+	// show memes
+	cardsSection.innerHTML = "";
+	filteredCountries.forEach( country => {
+		showCard(country);
+	});
+}
+
+function showCard(country) {
+	const {flags, name: {common:commonName}, population, region, capital} = country
+	cardsSection.innerHTML += `
+		<div class="card">
+			<div class="flag">
+				<img src="${flags.png}" alt="${flags.alt}">
+			</div>
+			<div class="info">
+				<h3 class="name">${commonName}</h3>
+				<p><span class="label">Population:</span> ${population} 81,770,900</p>
+				<p><span class="label">Region:</span> ${region}</p>
+				<p><span class="label">Capital:</span> ${capital}</p>
+			</div>
+		</div>
+	`;
+
+}
+
+function initRegions() {
+	// fill in regions array
+	regions = [];
+	countries.forEach( country => {
+		let region = country.region;
+		if (!regions.includes(region)) regions.push(region);
+	});
+	// init select of regions
+	regionSelect.innerHTML = '<option value="">Filter by Region</option>';
+	regions.forEach( region => {
+		regionSelect.innerHTML += `<option value=${region}>${region}</option>`;
+	});
+}
+
+/* data fetching ---------------------------END */
+
 /* event handlers -------------------------BEGIN */
 themeSwitcherBtn.addEventListener('click', e => {
 	setNextTheme();
+});
+
+document.addEventListener('DOMContentLoaded', e => {
+	fetchData();
+});
+
+searchInputTxt.addEventListener('keyup', e => {
+	showList();
+});
+
+regionSelect.addEventListener('change', e => {
+	showList();
 });
 /* event handlers -------------------------END */
 
 let defaultTheme = themes.find( element => element.name === 'theme-light');
 initThemes(defaultTheme);
 
-console.log("hello!!!");
