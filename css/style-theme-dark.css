@@ -18,3 +18,7 @@ body.theme-dark {
 	color: white;
 	background-color: hsl(209, 23%, 22%);
 }
+
+.theme-dark .card {
+	background-color: hsl(209, 23%, 22%);
+}
