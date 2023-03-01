@@ -1,4 +1,4 @@
 body.theme-light {
-	background-color: yellow;
+	background-color: white;
+	color: hsl(200, 15%, 8%);
 }
-
