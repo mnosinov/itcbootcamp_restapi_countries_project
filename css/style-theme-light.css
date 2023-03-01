@@ -2,3 +2,8 @@ body.theme-light {
 	background-color: white;
 	color: hsl(200, 15%, 8%);
 }
+
+main.theme-light {
+	background-color: hsl(0, 0%, 98%);
+	background-color: red;
+}

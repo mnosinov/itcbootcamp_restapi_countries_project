@@ -23,8 +23,9 @@ body *, *:before, *:after {
 	width: 100%;
 	height: 100vh;
 	display: flex;
-	justify-content: center;
-	align-items: flex-start;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 	margin: 0 auto;
 }
 
@@ -65,4 +66,23 @@ header  {
 #themeSwitcherBtn {
 	display: flex;
 	align-items: center;
+}
+
+.logo {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.filter-section {
+	display: flex;
+}
+
+.cards {
+	display: flex;
 }

@@ -6,4 +6,18 @@
 		max-width: 1440px;
 	}
 
+	.filter-section {
+		flex-direction: row;
+	}
+
+	header  {
+		padding: 10px 50px;
+	}
+
+	.cards {
+		flex-direction: row;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
+
 }
