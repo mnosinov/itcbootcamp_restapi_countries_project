@@ -13,7 +13,19 @@
 
 	.cards {
 		flex-direction: column;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin: 0 30px;
 	}
+
+	.card img {
+		width: 100%;
+	}
+
+	.card {
+		margin: 10px;
+	}
+
 
 	#searchInputTxt {
 		padding: 10px 10px 10px 40px;
