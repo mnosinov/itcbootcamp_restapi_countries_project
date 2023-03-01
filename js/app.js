@@ -1,7 +1,7 @@
 /* style themes ----------------------------BEGIN */
 let themes = [
-	{ name: 'theme-light', cssFile: 'css/style-theme-light.css', themeIcon: 'images/icon-theme-light.svg' },
-	{ name: 'theme-dark', cssFile: 'css/style-theme-dark.css', themeIcon: 'images/icon-theme-dark.svg' }
+	{ name: 'theme-light', cssFile: 'css/style-theme-light.css', themeIcon: 'images/icon-theme-light.svg', title: 'Light Mode' },
+	{ name: 'theme-dark', cssFile: 'css/style-theme-dark.css', themeIcon: 'images/icon-theme-dark.svg', title: 'Dark Mode'  }
 ];
 
 function initThemes(defaultTheme) { // should be called once on page load.
@@ -28,17 +28,22 @@ function setNextTheme(defaultTheme=undefined) {
 	if (currentTheme === undefined) {
 		// if no default theme had been passed in, then default is 1st in themese list
 		// and check if defaultTheme is in themes
-		if (defaultTheme && themes.find( theme => theme === defaultTheme ))
+		if (defaultTheme && themes.find( theme => theme === defaultTheme )) {
 			currentTheme = defaultTheme;
-		else
+		} else {
 			currentTheme = themes[0];
+		}
+		// set initial theme
+		let indexOfCurrentTheme = themes.indexOf(currentTheme);
+		document.body.classList.add(themes[indexOfCurrentTheme].name);
+	} else {
+		// get the next theme in list cyclically
+		let indexOfCurrentTheme = themes.indexOf(currentTheme);
+		let nextThemeIndex = (indexOfCurrentTheme + 1) % themes.length;
+		// turn off previous theme, turn on the next theme
+		document.body.classList.remove(themes[indexOfCurrentTheme].name);
+		document.body.classList.add(themes[nextThemeIndex].name);
 	}
-	// get the next theme in list cyclically
-	let indexOfCurrentTheme = themes.indexOf(currentTheme);
-	let nextThemeIndex = (indexOfCurrentTheme + 1) % themes.length;
-	// turn off previous theme, turn on the next theme
-	document.body.classList.remove(themes[indexOfCurrentTheme].name);
-	document.body.classList.add(themes[nextThemeIndex].name);
 }
 
 /* style themes ----------------------------END */
