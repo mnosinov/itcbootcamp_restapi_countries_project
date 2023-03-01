@@ -5,8 +5,7 @@ const themeTitleDiv = document.getElementById('themeTitleDiv');
 const searchInputTxt = document.getElementById('searchInputTxt');
 const cardsSection = document.getElementById('cardSection');
 const regionSelect = document.getElementById('regionSelect');
-
-
+const totalCountriesSpan = document.getElementById('totalCountriesSpan');
 
 // data
 let countries;
@@ -106,23 +105,27 @@ function showList() {
 	filteredCountries = filteredCountries.filter( element => element.name.common.toLowerCase().includes(searchString) );
 	console.log('search result', filteredCountries);
 
-	// show memes
+	// show countries cards
 	cardsSection.innerHTML = "";
 	filteredCountries.forEach( country => {
 		showCard(country);
 	});
+	// show total info
+	totalCountriesSpan.innerHTML = filteredCountries.length;
 }
 
 function showCard(country) {
-	const {flags, name: {common:commonName}, population, region, capital} = country
+	const {flags, name: {common:commonName}, population, region, capital, ccn3} = country;
 	cardsSection.innerHTML += `
 		<div class="card">
 			<div class="flag">
-				<img src="${flags.png}" alt="${flags.alt}">
+				<a href="details.html?ccn3=${ccn3}">
+					<img src="${flags.png}" alt="${flags.alt}">
+				</a>
 			</div>
 			<div class="info">
 				<h3 class="name">${commonName}</h3>
-				<p><span class="label">Population:</span> ${population} 81,770,900</p>
+				<p><span class="label">Population:</span> ${population.toLocaleString('en-US')}</p>
 				<p><span class="label">Region:</span> ${region}</p>
 				<p><span class="label">Capital:</span> ${capital}</p>
 			</div>

@@ -15,6 +15,10 @@
 		margin: 40px;
 	}
 
+	.total-info-section {
+		margin: 0 40px;
+	}
+
 	.cards {
 		flex-direction: row;
 		justify-content: space-between;

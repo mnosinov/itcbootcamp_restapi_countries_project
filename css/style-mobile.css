@@ -11,6 +11,10 @@
 		margin: 20px 15px;
 	}
 
+	.total-info-section {
+		margin: 0 15px 20px 30px;
+	}
+
 	.cards {
 		flex-direction: column;
 		justify-content: space-between;
@@ -32,7 +36,7 @@
 	}
 
 	#regionSelect {
-		margin: 40px 0;
+		margin: 40px 0 10px;
 	}
 
 }
