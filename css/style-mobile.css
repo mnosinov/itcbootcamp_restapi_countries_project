@@ -2,16 +2,25 @@
 
 @media only screen and (max-width:374px) {
 
-	.filter-section {
-		flex-direction: column;
-	}
-
 	header  {
 		padding: 10px 5px;
 	}
 
+	.filter-section {
+		flex-direction: column;
+		margin: 20px 15px;
+	}
+
 	.cards {
 		flex-direction: column;
+	}
+
+	#searchInputTxt {
+		padding: 10px 10px 10px 40px;
+	}
+
+	#regionSelect {
+		margin: 40px 0;
 	}
 
 }

@@ -33,9 +33,7 @@ header  {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	border: 1px solid black;
 	align-items: center;
-	padding: 10px 50px;
 }
 
 .theme-switcher {
@@ -81,8 +79,25 @@ main {
 
 .filter-section {
 	display: flex;
+	background-color: inherit;
+	justify-content: space-between;
 }
 
 .cards {
 	display: flex;
+	background-color: inherit;
+}
+
+#regionSelect {
+	border: none !important;
+	border-color: transparent !important;
+	padding: 15px;
+	font-size: 13px;
+}
+
+#searchInputTxt {
+	border: none !important;
+	border-color: transparent !important;
+	padding: 0 10px 0 40px;
+	font-size: 13px;
 }

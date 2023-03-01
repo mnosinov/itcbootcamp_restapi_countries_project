@@ -6,12 +6,13 @@
 		max-width: 1440px;
 	}
 
-	.filter-section {
-		flex-direction: row;
-	}
-
 	header  {
 		padding: 10px 50px;
+	}
+
+	.filter-section {
+		flex-direction: row;
+		margin: 40px;
 	}
 
 	.cards {
@@ -20,4 +21,14 @@
 		flex-wrap: wrap;
 	}
 
+	main {
+		padding: 0 10px;
+	}
+	
+	#searchInputTxt {
+	}
+
+	#regionSelect {
+
+	}
 }

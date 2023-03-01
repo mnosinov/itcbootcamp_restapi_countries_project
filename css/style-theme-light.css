@@ -3,7 +3,20 @@ body.theme-light {
 	color: hsl(200, 15%, 8%);
 }
 
-main.theme-light {
+.theme-light main {
 	background-color: hsl(0, 0%, 98%);
-	background-color: red;
+	box-shadow: inset 0px 10px 8px -6px rgba(57, 57, 26, 0.1);
+}
+
+.theme-light #searchInputTxt {
+	background: transparent url("../images/search-icon-black.png") no-repeat 13px center;
+	background-size: 4%;
+	box-shadow: 0px 0px 10px -3px rgba(57, 57, 26, 0.5);
+	border-radius: 5px;
+}
+
+.theme-light #regionSelect {
+	background-color: white;
+	box-shadow: 0px 0px 10px -3px rgba(57, 57, 26, 0.5);
+	border-radius: 5px;
 }

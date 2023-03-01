@@ -69,7 +69,7 @@ themeSwitcherBtn.addEventListener('click', e => {
 });
 /* event handlers -------------------------END */
 
-let defaultTheme = themes.find( element => element.name === 'theme-light');
+let defaultTheme = themes.find( element => element.name === 'theme-dark');
 initThemes(defaultTheme);
 
 console.log("hello!!!");
