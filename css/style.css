@@ -54,6 +54,25 @@ header  {
 	background-color: orange;
 }
 
+.clickable-btn {
+	display: inherit;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 25px;
+	box-shadow: 0px 0px 10px -3px rgba(57, 57, 26, 0.5);
+}
+
+.clickable-btn:hover {
+	cursor: pointer;
+	background-color: orange !important;
+}
+
+.arrow-left {
+	font-size: 20px;
+	padding: 0;
+	margin: 0;
+}
+
 .theme-icon img {
 	height: 14px;
 	display: flex;
@@ -134,7 +153,63 @@ main {
 	font-size: 13px;
 }
 
-.card .info .label {
+.card .info .label,
+#detailsSection .info .label {
 	font-weight: bold;
 	font-size: inherit;
 }
+
+.actions-section {
+}
+
+#detailsSection {
+	display: flex;
+}
+
+#detailsSection>.info {
+	display: flex;
+}
+
+#detailsSection .info h2 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#detailsSection .details-info {
+	display: flex;
+}
+
+#detailsSection .details-info p {
+	margin-top: 8px;
+}
+
+#detailsSection .border-countries {
+	display: flex;
+	align-items: center;
+}
+
+#detailsSection .border-countries ul {
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#detailsSection .border-countries ul>li {
+	margin: 3px;
+}
+
+#detailsSection .border-countries ul>li a {
+	color: inherit;
+}
+
+#detailsSection .border-countries ul>li a:link,
+#detailsSection .border-countries ul>li a:visited,
+#detailsSection .border-countries ul>li a:hover,
+#detailsSection .border-countries ul>li a:active {
+	text-decoration: none;
+}
+
+#detailsSection .border-countries p.label {
+	margin-right: 12px;
+}
+

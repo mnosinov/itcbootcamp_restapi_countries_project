@@ -35,7 +35,7 @@
 	}
 
 	main {
-		padding: 0 10px;
+		padding: 0 10px 60px;
 	}
 	
 	#searchInputTxt {
@@ -44,4 +44,45 @@
 	#regionSelect {
 
 	}
+
+	.actions-section {
+		margin: 0 40px;
+		padding: 40px 0;
+	}
+
+	#detailsSection {
+		margin: 0 40px;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	#detailsSection .flag-div img {
+		width: 450px;
+	}
+
+	#detailsSection .info {
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	#detailsSection>.info {
+		margin-left: 80px;
+	}
+
+	#detailsSection .details-info {
+		flex-direction: row;
+		margin-top: 16px;
+		justify-content: flex-start;
+	}
+
+	#detailsSection .details-info .second-part {
+		margin-left: 20%;
+	}
+
+	#detailsSection .border-countries {
+		flex-direction: row;
+		margin-top: 40px;
+	}
+
 }

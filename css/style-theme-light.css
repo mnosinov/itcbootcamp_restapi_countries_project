@@ -19,3 +19,9 @@ body.theme-light {
 .theme-light .card {
 	background-color: white;
 }
+
+.theme-light .clickable-btn {
+	background-color: white;
+	color: inherit;
+}
+

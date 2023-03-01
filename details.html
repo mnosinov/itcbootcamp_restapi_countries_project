@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+	<link rel="shortcut icon" href="#" />
+	<title>Some Country</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter&family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style-desktop.css">
+	<link rel="stylesheet" href="css/style-mobile.css">
+</head>
+
+<body>
+
+	<div class="container">
+
+		<header>
+			<div class="logo">Where in the world?</div>
+			<div class="theme-switcher">
+				<button class="clickable-area-btn" id="themeSwitcherBtn">
+					<div class="theme-icon"><img src="" alt="Theme Icon" id="themeIconImg"></div>
+					<div class="theme-title" id="themeTitleDiv">Theme title</div>
+				</button>
+			</div>
+		</header>
+
+		<main>
+
+			<section class="actions-section">
+				<button class="clickable-btn" id="backBtn"> <span class="arrow-left">&#x2190;</span> Back </button>
+			</section>
+
+			<section id="detailsSection">
+				<div class="flag-div">
+					<img src="https://flagcdn.com/w320/td.png" alt="Some Alt">
+				</div>
+				<div class="info">
+					<h2>Belgium</h2>
+					<div class="details-info info">
+						<div class="first-part">
+							<p><span class="label">Native Name:</span> Belgie</p>
+							<p><span class="label">Population:</span> 16,425,859</p>
+							<p><span class="label">Region:</span> Africa</p>
+							<p><span class="label">Sub Region:</span> Sub Africa</p>
+							<p><span class="label">Capital:</span> N'Djamena</p>
+						</div>
+						<div class="second-part">
+							<p><span class="label">Top Level Domain:</span> .be</p>
+							<p><span class="label">Currencies:</span> euro</p>
+							<p><span class="label">Languages:</span> Dutch, French, German</p>
+						</div>
+					</div>
+					<div class="border-countries">
+						<p class="label">Border Countries:</p> 
+						<ul>
+							<li><a href="?ccn3=123"><button class="clickable-btn">France</button></a> </li>
+							<li><a href="?ccn3=123"><button class="clickable-btn">France</button></a> </li>
+							<li><a href="?ccn3=123"><button class="clickable-btn">France</button></a> </li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+		</main>
+
+	</div>
+	
+	<script type="text/javascript" src="js/app-details.js"></script>
+
+</body>
+
+</html>

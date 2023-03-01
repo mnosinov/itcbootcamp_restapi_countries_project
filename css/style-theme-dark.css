@@ -22,3 +22,9 @@ body.theme-dark {
 .theme-dark .card {
 	background-color: hsl(209, 23%, 22%);
 }
+
+.theme-dark .clickable-btn {
+	background-color: hsl(209, 23%, 22%);
+	color: inherit;
+}
+
