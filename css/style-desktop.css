@@ -17,8 +17,18 @@
 
 	.cards {
 		flex-direction: row;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		flex-wrap: wrap;
+		margin: 0 40px;
+	}
+
+	.card img {
+		width: 200px;
+	}
+
+	.card {
+		margin: 10px;
+		border-radius: 5px;
 	}
 
 	main {

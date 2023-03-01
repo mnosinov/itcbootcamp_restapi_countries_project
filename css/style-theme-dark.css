@@ -5,14 +5,11 @@ body.theme-dark {
 
 .theme-dark main {
 	background-color: hsl(207, 26%, 17%);
-	box-shadow: inset 0px 10px 8px -6px rgba(57, 57, 26, 0.2);
 }
 
 .theme-dark #searchInputTxt {
 	background: transparent url("../images/search-icon-white.png") no-repeat 13px center;
 	background-size: 4%;
-	box-shadow: 0px 0px 10px -3px rgba(57, 57, 26, 0.5);
-	border-radius: 5px;
 	background-color: hsl(209, 23%, 22%);
 	color: white;
 }
@@ -20,6 +17,4 @@ body.theme-dark {
 .theme-dark #regionSelect {
 	color: white;
 	background-color: hsl(209, 23%, 22%);
-	box-shadow: 0px 0px 10px -3px rgba(57, 57, 26, 0.5);
-	border-radius: 5px;
 }
