@@ -3,6 +3,7 @@ const themeSwitcherBtn = document.getElementById('themeSwitcherBtn');
 const themeIconImg = document.getElementById('themeIconImg');
 const themeTitleDiv = document.getElementById('themeTitleDiv');
 const detailsSection = document.getElementById('detailsSection');
+const backBtn = document.getElementById('backBtn');
 
 // data
 let country;
@@ -90,7 +91,6 @@ async function fetchData(cca3) {
 
 function storeData(fetchedCountries) {
 	country = fetchedCountries[0];
-	console.log(country);
 }
 
 async function showDetails() {
@@ -103,7 +103,7 @@ async function showDetails() {
 	let languagesNames = Object.keys(languages).map( key => languages[key]);
 	let borderCountriesUl = await fetchBorderCountries(borders);
 
-	detailsSection.innerHTML += `
+	detailsSection.innerHTML = `
 		<div class="flag-div">
 			<img src="${flags.png}" alt="${flags.alt}">
 		</div>
@@ -129,9 +129,12 @@ async function showDetails() {
 			</div>
 		</div>
 	`;
+	// set page title
+	document.title = name.common;
 }
 
 async function fetchBorderCountries(borders) {
+	if (!borders) return "";
 	let resultLiList = "";
 	for (let borderCountryCc3a of borders) {
 		let borderCountry;
@@ -163,6 +166,9 @@ document.addEventListener('DOMContentLoaded', e => {
 	showCountry(countryCcn3);
 });
 
+backBtn.addEventListener('click', e => {
+	window.location.href = 'index.html';
+});
 /* event handlers -------------------------END */
 
 let defaultTheme = themes.find( element => element.name === 'theme-light');

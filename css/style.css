@@ -213,3 +213,19 @@ main {
 	margin-right: 12px;
 }
 
+.loading {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.loading p {
+	margin: 40px;
+}
+
+.loading img {
+	width: 40px;
+}
