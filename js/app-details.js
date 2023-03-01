@@ -69,13 +69,22 @@ function setCurrentThemeSwitcherLabel(theme) {
 
 /* data fetching ---------------------------BEGIN */
 
-function fetchData(ccn3) {
-	fetch(`https://restcountries.com/v3.1/alpha/${ccn3}`)
+async function showCountry(countryCcn3) {
+	let responseData;
+	await fetchData(countryCcn3).then( data => {
+		responseData = data;
+	});
+	storeData(responseData);
+	showDetails();
+}
+
+async function fetchData(cca3) {
+	return fetch(`https://restcountries.com/v3.1/alpha/${cca3}`)
 		.then(response => response.json())
 		.then(responseData => {
 			console.log('fetching data from REST API');
-			storeData(responseData);
-			showDetails();
+			console.log(responseData);
+			return responseData;
 		});
 }
 
@@ -84,26 +93,60 @@ function storeData(fetchedCountries) {
 	console.log(country);
 }
 
-function showDetails() {
-	const {flags, name: {common:commonName}, population, region, capital, ccn3} = country;
-	/*
+async function showDetails() {
+	const {
+		flags, name, population, region, subregion, capital, tld, currencies,
+		languages, borders
+	} = country;
+	let nativeNames = Object.keys(name.nativeName).map( key => name.nativeName[key].official);
+	let currenciesNames = Object.keys(currencies).map( key => currencies[key].name);
+	let languagesNames = Object.keys(languages).map( key => languages[key]);
+	let borderCountriesUl = await fetchBorderCountries(borders);
+
 	detailsSection.innerHTML += `
-		<div class="card">
-			<div class="flag">
-				<a href="details.html?ccn3=${ccn3}">
-					<img src="${flags.png}" alt="${flags.alt}">
-				</a>
+		<div class="flag-div">
+			<img src="${flags.png}" alt="${flags.alt}">
+		</div>
+		<div class="info">
+			<h2>${name.common}</h2>
+			<div class="details-info info">
+				<div class="first-part">
+					<p><span class="label">Native Name:</span> ${nativeNames}</p>
+					<p><span class="label">Population:</span> ${population.toLocaleString('en-US')}</p>
+					<p><span class="label">Region:</span> ${region}</p>
+					<p><span class="label">Sub Region:</span> ${subregion}</p>
+					<p><span class="label">Capital:</span> ${capital}</p>
+				</div>
+				<div class="second-part">
+					<p><span class="label">Top Level Domain:</span> ${tld}</p>
+					<p><span class="label">Currencies:</span> ${currenciesNames}</p>
+					<p><span class="label">Languages:</span> ${languagesNames}</p>
+				</div>
 			</div>
-			<div class="info">
-				<h3 class="name">${commonName}</h3>
-				<p><span class="label">Population:</span> ${population.toLocaleString('en-US')}</p>
-				<p><span class="label">Region:</span> ${region}</p>
-				<p><span class="label">Capital:</span> ${capital}</p>
+			<div class="border-countries">
+				<p class="label">Border Countries:</p> 
+				<ul>${borderCountriesUl}</ul>
 			</div>
 		</div>
 	`;
-	*/
+}
 
+async function fetchBorderCountries(borders) {
+	let resultLiList = "";
+	for (let borderCountryCc3a of borders) {
+		let borderCountry;
+		await fetchData(borderCountryCc3a).then( data => {
+			borderCountry = data[0];
+		});
+		resultLiList += `
+			<li>
+				<a href="?cca3=${borderCountry.cca3}">
+					<button class="clickable-btn">${borderCountry.name.common}</button>
+				</a>
+			</li>
+		`;
+	}
+	return resultLiList;
 }
 
 /* data fetching ---------------------------END */
@@ -116,8 +159,8 @@ themeSwitcherBtn.addEventListener('click', e => {
 document.addEventListener('DOMContentLoaded', e => {
 	let currentUrlStr = window.location.href;
 	let currentUrl = new URL(currentUrlStr);
-	const countryCcn3 = currentUrl.searchParams.get("ccn3");
-	fetchData(countryCcn3);
+	const countryCcn3 = currentUrl.searchParams.get("cca3");
+	showCountry(countryCcn3);
 });
 
 /* event handlers -------------------------END */

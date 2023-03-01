@@ -115,11 +115,11 @@ function showList() {
 }
 
 function showCard(country) {
-	const {flags, name: {common:commonName}, population, region, capital, ccn3} = country;
+	const {flags, name: {common:commonName}, population, region, capital, cca3} = country;
 	cardsSection.innerHTML += `
 		<div class="card">
 			<div class="flag">
-				<a href="details.html?ccn3=${ccn3}">
+				<a href="details.html?cca3=${cca3}">
 					<img src="${flags.png}" alt="${flags.alt}">
 				</a>
 			</div>
