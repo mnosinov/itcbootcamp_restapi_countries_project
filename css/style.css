@@ -103,7 +103,7 @@ main {
 	justify-content: space-between;
 }
 
-.total-info-section {
+.pagination-sorting-section {
 }
 
 #regionSelect {
@@ -229,3 +229,9 @@ main {
 .loading img {
 	width: 40px;
 }
+
+.current-page {
+	font-weight: bold;
+	margin: 0 7px;
+}
+

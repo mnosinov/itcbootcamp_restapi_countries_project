@@ -79,5 +79,21 @@
 	#detailsSection .border-countries p {
 		margin-bottom: 14px;
 	}
+
+	.pagination-nav-btn {
+		padding: 0 5px;
+		margin: 15px 0;
+	}
+
+	.countries-quantity {
+		margin: 15px 0;
+	}
+
+	.pagination-sorting-section {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: center;
+		justify-content: space-between;
+	}
 }
 

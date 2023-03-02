@@ -6,10 +6,12 @@ const searchInputTxt = document.getElementById('searchInputTxt');
 const cardsSection = document.getElementById('cardSection');
 const regionSelect = document.getElementById('regionSelect');
 const totalCountriesSpan = document.getElementById('totalCountriesSpan');
+const pageSizeSelect = document.getElementById('pageSizeSelect');
 
 // data
 let countries;
 let regions;
+let currentPage = 1;
 
 /* style themes ----------------------------BEGIN */
 let themes = [
@@ -112,26 +114,73 @@ function storeData(fetchedCountries) {
 	initRegions();
 }
 
+function gotoPage(pageNumber) {
+	currentPage = pageNumber;
+	showList();
+}
+
+function applyPagination(items) {
+	let pageSize = +pageSizeSelect.value;
+	let totalQnt = items.length;
+	let pagesQnt = totalQnt / pageSize;
+	if (pagesQnt !== Math.trunc(pagesQnt)) {
+		// add 1 page
+		pagesQnt = Math.trunc(pagesQnt) + 1;
+	}
+	let itemsToShowStartIndex = pageSize * (currentPage - 1);
+	// display pagination nav
+	let paginationNav;
+	if (items.length === 0) {
+		paginationNav = "";
+	} else {
+		paginationNav = `
+			<button class="pagination-nav-btn" ${ currentPage === 1 ? "disabled": ""}
+				onclick="gotoPage(1)"
+			>
+				First
+			</button>
+			<button class="pagination-nav-btn" ${ currentPage === 1 ? "disabled": ""}
+				onclick="gotoPage(${currentPage - 1})"
+			>
+				Prev
+			</button>
+			<span class="current-page">${currentPage}</span>
+			<button class="pagination-nav-btn" ${ currentPage === pagesQnt ? "disabled": ""}
+				onclick="gotoPage(${currentPage + 1})"
+			>
+				Next
+			</button>
+			<button class="pagination-nav-btn" ${ currentPage === pagesQnt ? "disabled": ""}
+				onclick="gotoPage(${pagesQnt})"
+			>
+				Last
+			</button>
+		`;
+	}
+	let paginationNavDivs = document.querySelectorAll('.pagination-nav');
+	paginationNavDivs.forEach( div => {
+		div.innerHTML = paginationNav;
+	});
+	return items.slice(itemsToShowStartIndex, itemsToShowStartIndex + pageSize);
+}
+
 function showList() {
-	console.log(regionSelect.value);
 	// filter countries by region filter
 	let filteredCountries = countries;
-	console.log('quantity of fetched countries', countries.length);
 	if (regionSelect.value) {
 		filteredCountries = countries.filter( element => element.region === regionSelect.value ); 
 	}
-	console.log(10);
-	console.log(filteredCountries.length);
 	
 	// filter countries by search string
 	let searchString =  searchInputTxt.value.toLowerCase();
-	console.log('search by', searchString);
 	filteredCountries = filteredCountries.filter( element => element.name.common.toLowerCase().includes(searchString) );
-	console.log('search result', filteredCountries);
+
+	// set up pagination
+	let pageItems = applyPagination(filteredCountries);
 
 	// show countries cards
 	cardsSection.innerHTML = "";
-	filteredCountries.forEach( country => {
+	pageItems.forEach( country => {
 		showCard(country);
 	});
 	// show total info
@@ -189,7 +238,6 @@ document.addEventListener('DOMContentLoaded', e => {
 	let countryCcn3 = currentUrl.searchParams.get("cca3");
 	let currentThemeName = currentUrl.searchParams.get("theme");
 	let currentTheme = themes.find( element => element.name === currentThemeName );
-	console.log(currentTheme);
 
 	// remove all themes from body's class list
 	removeAllThemesFromBodyClasses();
@@ -202,10 +250,17 @@ document.addEventListener('DOMContentLoaded', e => {
 });
 
 searchInputTxt.addEventListener('keyup', e => {
+	currentPage = 1;
 	showList();
 });
 
 regionSelect.addEventListener('change', e => {
+	currentPage = 1;
+	showList();
+});
+
+pageSizeSelect.addEventListener('change', e => {
+	currentPage = 1;
 	showList();
 });
 /* event handlers -------------------------END */
