@@ -138,12 +138,16 @@ function showList() {
 	totalCountriesSpan.innerHTML = filteredCountries.length;
 }
 
+function gotoDetailsPage(cca3) {
+	window.location.href = `details.html?cca3=${cca3}&theme=${getCurrentTheme().name}`;
+}
+
 function showCard(country) {
 	const {flags, name: {common:commonName}, population, region, capital, cca3} = country;
 	cardsSection.innerHTML += `
 		<div class="card">
 			<div class="flag">
-				<a href="details.html?cca3=${cca3}&theme=dark">
+				<a href="javascript:gotoDetailsPage('${cca3}');">
 					<img src="${flags.png}" alt="${flags.alt}">
 				</a>
 			</div>
@@ -180,6 +184,20 @@ themeSwitcherBtn.addEventListener('click', e => {
 });
 
 document.addEventListener('DOMContentLoaded', e => {
+	let currentUrlStr = window.location.href;
+	let currentUrl = new URL(currentUrlStr);
+	let countryCcn3 = currentUrl.searchParams.get("cca3");
+	let currentThemeName = currentUrl.searchParams.get("theme");
+	let currentTheme = themes.find( element => element.name === currentThemeName );
+	console.log(currentTheme);
+
+	// remove all themes from body's class list
+	removeAllThemesFromBodyClasses();
+	// add the next theme class to body's class list
+	setThemeToBodyClasses(currentTheme);
+	// set current theme switcher label
+	setCurrentThemeSwitcherLabel(currentTheme);
+
 	fetchData();
 });
 

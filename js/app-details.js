@@ -24,34 +24,58 @@ function initThemes(defaultTheme) { // should be called once on page load.
 		head.appendChild(link);
 	});
 	// set default theme
-	setNextTheme(defaultTheme);
+	let currentTheme = getCurrentTheme(defaultTheme); 
+	// remove all themes from body's class list
+	removeAllThemesFromBodyClasses();
+	// add the next theme class to body's class list
+	setThemeToBodyClasses(currentTheme);
+	// set current theme switcher label
+	setCurrentThemeSwitcherLabel(currentTheme);
+}
+
+function getCurrentTheme(defaultTheme=undefined) {
+	let currentTheme;
+	for (let cls of document.body.classList) {
+		currentTheme = themes.find( element => element.name === cls );
+		if (currentTheme) return currentTheme;
+	}
+	// theme is not set
+	// if no default theme had been passed in, then default is 1st in themese list
+	// and check if defaultTheme is in themes
+	if (defaultTheme && themes.find( theme => theme === defaultTheme ))
+		currentTheme = defaultTheme;
+	else
+		currentTheme = themes[0];
+	// set initial theme
+	return currentTheme;
+}
+
+// add the next theme class to body's class list
+function setThemeToBodyClasses(theme) {
+	document.body.classList.add(theme.name);
+}
+
+// remove all themes from body's class list
+function removeAllThemesFromBodyClasses() {
+	themes.forEach( theme => { document.body.classList.remove(theme.name); });
+}
+
+function getNextTheme(currentTheme) {
+	// get the next theme in list cyclically
+	let indexOfCurrentTheme = themes.indexOf(currentTheme);
+	let nextThemeIndex = (indexOfCurrentTheme + 1) % themes.length;
+	let nextTheme = themes[nextThemeIndex];
+	return nextTheme;
 }
 
 function setNextTheme(defaultTheme=undefined) {
-	let currentTheme, nextTheme;
-	for (let cls of document.body.classList) {
-		currentTheme = themes.find( element => element.name === cls );
-		if (currentTheme) break;
-	}
-	if (currentTheme === undefined) {
-		// if no default theme had been passed in, then default is 1st in themese list
-		// and check if defaultTheme is in themes
-		if (defaultTheme && themes.find( theme => theme === defaultTheme ))
-			nextTheme = defaultTheme;
-		else
-			nextTheme = themes[0];
-		// set initial theme
-	} else {
-		// get the next theme in list cyclically
-		let indexOfCurrentTheme = themes.indexOf(currentTheme);
-		let nextThemeIndex = (indexOfCurrentTheme + 1) % themes.length;
-		// turn off previous theme, turn on the next theme
-		nextTheme = themes[nextThemeIndex];
-	}
+	let currentTheme = getCurrentTheme(defaultTheme); 
+	
+	let nextTheme = getNextTheme(currentTheme);
 	// remove all themes from body's class list
-	themes.forEach( theme => { document.body.classList.remove(theme.name); });
+	removeAllThemesFromBodyClasses();
 	// add the next theme class to body's class list
-	document.body.classList.add(nextTheme.name);
+	setThemeToBodyClasses(nextTheme);
 	// set current theme switcher label
 	setCurrentThemeSwitcherLabel(nextTheme);
 }
@@ -162,12 +186,22 @@ themeSwitcherBtn.addEventListener('click', e => {
 document.addEventListener('DOMContentLoaded', e => {
 	let currentUrlStr = window.location.href;
 	let currentUrl = new URL(currentUrlStr);
-	const countryCcn3 = currentUrl.searchParams.get("cca3");
+	let countryCcn3 = currentUrl.searchParams.get("cca3");
+	let currentThemeName = currentUrl.searchParams.get("theme");
+	let currentTheme = themes.find( element => element.name === currentThemeName );
+	console.log(currentTheme);
+
+	// remove all themes from body's class list
+	removeAllThemesFromBodyClasses();
+	// add the next theme class to body's class list
+	setThemeToBodyClasses(currentTheme);
+	// set current theme switcher label
+	setCurrentThemeSwitcherLabel(currentTheme);
 	showCountry(countryCcn3);
 });
 
 backBtn.addEventListener('click', e => {
-	window.location.href = 'index.html';
+	window.location.href = `index.html?theme=${getCurrentTheme().name}`;
 });
 /* event handlers -------------------------END */
 
