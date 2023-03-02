@@ -33,7 +33,7 @@ function initThemes(defaultTheme) { // should be called once on page load.
 	// add the next theme class to body's class list
 	setThemeToBodyClasses(currentTheme);
 	// set current theme switcher label
-	setCurrentThemeSwitcherLabel(getNextTheme(currentTheme));
+	setCurrentThemeSwitcherLabel(currentTheme);
 }
 
 function getCurrentTheme(defaultTheme=undefined) {
