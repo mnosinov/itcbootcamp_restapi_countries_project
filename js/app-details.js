@@ -168,7 +168,9 @@ async function fetchBorderCountries(borders) {
 		resultLiList += `
 			<li>
 				<a href="?cca3=${borderCountry.cca3}">
-					<button class="clickable-btn">${borderCountry.name.common}</button>
+					<button class="clickable-btn"
+						!STOP POINT title="${borderCountry.currency} ${borderCountry.capital} ${borderCountry.population}"
+					>${borderCountry.name.common}</button>
 				</a>
 			</li>
 		`;
