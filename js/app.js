@@ -7,11 +7,16 @@ const cardsSection = document.getElementById('cardSection');
 const regionSelect = document.getElementById('regionSelect');
 const totalCountriesSpan = document.getElementById('totalCountriesSpan');
 const pageSizeSelect = document.getElementById('pageSizeSelect');
+const sortingDefaultA = document.getElementById('sortingDefaultA');
+const sortingByNameA = document.getElementById('sortingByNameA');
+const sortingByPopulationA = document.getElementById('sortingByPopulationA');
 
 // data
 let countries;
 let regions;
 let currentPage = 1;
+let currentSortingBy = 'default';	//in undefined then it means sort by default;
+let currentSortingDirection;
 
 /* style themes ----------------------------BEGIN */
 let themes = [
@@ -118,6 +123,31 @@ function gotoPage(pageNumber) {
 	showList();
 }
 
+function applySorting(items) {
+	if (currentSortingBy === 'default') return items.slice();
+	if (currentSortingBy === 'name') {
+		let result = items.slice();
+		result.sort( (a, b) => {
+			if (currentSortingDirection === 'asc') {
+				return a.name.common.toLowerCase().localeCompare(b.name.common.toLowerCase());
+			} else {
+				return b.name.common.toLowerCase().localeCompare(a.name.common.toLowerCase());
+			}
+		});
+		console.log(result);
+		return result;
+	}
+	if (currentSortingBy === 'population') {
+		console.log(103);
+		return items.slice().sort( (a, b) => {
+			if (currentSortingDirection === 'asc')
+				return a.population - b.population;
+			else
+				return b.population - a.population;
+		});
+	}
+}
+
 function applyPagination(items) {
 	let pageSize = +pageSizeSelect.value;
 	let totalQnt = items.length;
@@ -174,8 +204,12 @@ function showList() {
 	let searchString =  searchInputTxt.value.toLowerCase();
 	filteredCountries = filteredCountries.filter( element => element.name.common.toLowerCase().includes(searchString) );
 
+	// apply sorting
+	let filtredSortedCountries = applySorting(filteredCountries);
+	console.log(filtredSortedCountries);
+
 	// set up pagination
-	let pageItems = applyPagination(filteredCountries);
+	let pageItems = applyPagination(filtredSortedCountries);
 
 	// show countries cards
 	cardsSection.innerHTML = "";
@@ -224,6 +258,37 @@ function initRegions() {
 	});
 }
 
+function setSorting(newSortBy) {
+	// change sorting variables: by and direction
+	if (currentSortingBy !== newSortBy) {
+		currentSortingBy = newSortBy;
+		currentSortingDirection = 'asc';
+	} else {
+		currentSortingDirection = currentSortingDirection === 'asc' ? 'desc': 'asc';
+	}
+	// setup sorting element on page
+	let sortingDirectionSymbol = currentSortingDirection === 'asc' ? '&uarr;' : '&darr';
+	sortingDefaultA.style.fontWeight = currentSortingBy === 'default' ? 'bold' : 'normal';
+	// reset the rest sorting elements
+	sortingByNameA.innerHTML = 'Name&uarr;';
+	sortingByNameA.style.fontWeight = 'normal';
+	sortingByPopulationA.innerHTML = 'Population&uarr;'
+	sortingByPopulationA.style.fontWeight = 'normal';
+	switch (currentSortingBy) {
+		case 'name':
+			sortingByNameA.style.fontWeight = 'bold'
+			if (currentSortingDirection === 'desc') {
+				sortingByNameA.innerHTML = 'Name&darr;';
+			}
+			break;
+		case 'population':
+			sortingByPopulationA.style.fontWeight = 'bold';
+			if (currentSortingDirection === 'desc') {
+				sortingByPopulationA.innerHTML = 'Population&darr;';
+			}
+			break;
+	}
+}
 /* data fetching ---------------------------END */
 
 /* event handlers -------------------------BEGIN */
@@ -267,8 +332,26 @@ pageSizeSelect.addEventListener('change', e => {
 	currentPage = 1;
 	showList();
 });
+
+sortingDefaultA.addEventListener('click', e => {
+	e.preventDefault();
+	setSorting('default');
+	showList();
+});
+sortingByNameA.addEventListener('click', e => {
+	e.preventDefault();
+	setSorting('name');
+	showList();
+});
+sortingByPopulationA.addEventListener('click', e => {
+	e.preventDefault();
+	setSorting('population');
+	showList();
+});
+
+
 /* event handlers -------------------------END */
 
 let defaultTheme = themes.find( element => element.name === 'theme-light');
 initThemes(defaultTheme);
-
+setSorting(currentSortingBy);

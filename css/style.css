@@ -234,3 +234,7 @@ main {
 	font-weight: bold;
 	margin: 0 7px;
 }
+
+.sorting-div a {
+	text-decoration: none;
+}

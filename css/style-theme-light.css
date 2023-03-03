@@ -24,3 +24,11 @@ body.theme-light {
 	background-color: white;
 	color: inherit;
 }
+
+.theme-light .sorting-div a {
+	color: navy;
+}
+
+.theme-light .sorting-div a:hover {
+	color: orange;
+}

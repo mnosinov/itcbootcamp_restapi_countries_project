@@ -27,3 +27,11 @@ body.theme-dark {
 	background-color: hsl(209, 23%, 22%);
 	color: inherit;
 }
+
+.theme-dark .sorting-div a {
+	color: yellow;
+}
+
+.theme-dark .sorting-div a:hover {
+	color: orange;
+}

@@ -95,5 +95,9 @@
 		align-items: center;
 		justify-content: space-between;
 	}
+
+	.sorting-div {
+		margin-top: 15px;
+	}
 }
 
