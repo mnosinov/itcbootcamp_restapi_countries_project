@@ -103,7 +103,6 @@ function fetchData() {
 	fetch(`https://restcountries.com/v3.1/all`)
 		.then(response => response.json())
 		.then(responseData => {
-			console.log('fetching data from REST API');
 			storeData(responseData);
 			showList();
 		});
@@ -237,7 +236,12 @@ document.addEventListener('DOMContentLoaded', e => {
 	let currentUrl = new URL(currentUrlStr);
 	let countryCcn3 = currentUrl.searchParams.get("cca3");
 	let currentThemeName = currentUrl.searchParams.get("theme");
-	let currentTheme = themes.find( element => element.name === currentThemeName );
+	let currentTheme;
+	if (currentThemeName) {
+		currentTheme = themes.find( element => element.name === currentThemeName );
+	} else {
+		currentTheme = getCurrentTheme(defaultTheme); 
+	}
 
 	// remove all themes from body's class list
 	removeAllThemesFromBodyClasses();
