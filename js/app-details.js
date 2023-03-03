@@ -169,7 +169,12 @@ async function fetchBorderCountries(borders) {
 			<li>
 				<a href="?cca3=${borderCountry.cca3}">
 					<button class="clickable-btn"
-						!STOP POINT title="${borderCountry.currency} ${borderCountry.capital} ${borderCountry.population}"
+						title="
+Name:${borderCountry.name.common}
+Currencies:${Object.keys(borderCountry.currencies).map( key => borderCountry.currencies[key].name)}
+Capital:${borderCountry.capital}
+Population:${borderCountry.population.toLocaleString('en-US')}
+						"
 					>${borderCountry.name.common}</button>
 				</a>
 			</li>
