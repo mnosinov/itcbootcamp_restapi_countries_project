@@ -238,3 +238,12 @@ main {
 .sorting-div a {
 	text-decoration: none;
 }
+
+.fetch-data button {
+	padding: 5px 10px;
+	border-radius: 5px
+}
+
+.fetch-data button:hover {
+	background-color: orange;
+}

@@ -35,3 +35,11 @@ body.theme-dark {
 .theme-dark .sorting-div a:hover {
 	color: orange;
 }
+
+.theme-dark .fetch-data button {
+	border: 1px solid silver;
+}
+
+.theme-dark .fetch-data button:link {
+	background-color: gray;
+}

@@ -29,6 +29,6 @@ body.theme-light {
 	color: navy;
 }
 
-.theme-light .sorting-div a:hover {
-	color: orange;
+.theme-light .fetch-data button {
+	border: 1px solid silver;
 }

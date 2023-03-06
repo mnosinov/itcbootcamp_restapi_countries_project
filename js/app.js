@@ -10,6 +10,7 @@ const pageSizeSelect = document.getElementById('pageSizeSelect');
 const sortingDefaultA = document.getElementById('sortingDefaultA');
 const sortingByNameA = document.getElementById('sortingByNameA');
 const sortingByPopulationA = document.getElementById('sortingByPopulationA');
+const fetchDataBtn = document.querySelector('.fetch-data');
 
 // data
 let countries;
@@ -355,7 +356,9 @@ sortingByPopulationA.addEventListener('click', e => {
 	setSorting('population');
 	showList();
 });
-
+fetchDataBtn.addEventListener('click', e => {
+	fetchData();
+});
 
 /* event handlers -------------------------END */
 
