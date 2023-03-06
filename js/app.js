@@ -109,12 +109,16 @@ function fetchData() {
 		.then(response => response.json())
 		.then(responseData => {
 			storeData(responseData);
+			// reset page status
+			currentPage = 1;
+			currentSortingBy = 'default';
 			showList();
 		});
 }
 
 function storeData(fetchedCountries) {
 	countries = fetchedCountries
+	localStorage.setItem("countries", JSON.stringify(countries));
 	initRegions();
 }
 
@@ -134,11 +138,9 @@ function applySorting(items) {
 				return b.name.common.toLowerCase().localeCompare(a.name.common.toLowerCase());
 			}
 		});
-		console.log(result);
 		return result;
 	}
 	if (currentSortingBy === 'population') {
-		console.log(103);
 		return items.slice().sort( (a, b) => {
 			if (currentSortingDirection === 'asc')
 				return a.population - b.population;
@@ -206,7 +208,6 @@ function showList() {
 
 	// apply sorting
 	let filtredSortedCountries = applySorting(filteredCountries);
-	console.log(filtredSortedCountries);
 
 	// set up pagination
 	let pageItems = applyPagination(filtredSortedCountries);
@@ -315,7 +316,13 @@ document.addEventListener('DOMContentLoaded', e => {
 	// set current theme switcher label
 	setCurrentThemeSwitcherLabel(currentTheme);
 
-	fetchData();
+	countries = JSON.parse(localStorage.getItem('countries'));
+	if (!countries) {
+		fetchData();
+	} else {
+		initRegions();
+		showList();
+	}
 });
 
 searchInputTxt.addEventListener('keyup', e => {
