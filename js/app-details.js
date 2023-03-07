@@ -167,7 +167,7 @@ async function fetchBorderCountries(borders) {
 		});
 		resultLiList += `
 			<li>
-				<a href="?cca3=${borderCountry.cca3}">
+				<a href="?cca3=${borderCountry.cca3}&theme=${getCurrentTheme().name}">
 					<button class="clickable-btn"
 						title="
 Name:${borderCountry.name.common}
